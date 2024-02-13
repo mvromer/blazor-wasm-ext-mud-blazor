@@ -1,0 +1,25 @@
+{
+  "name": "blazor-wasm-ext-mud-blazor",
+  "version": "0.1.0",
+  "description": "Experimental extension for blazor-wasm-single-spa to add micro-frontend support for MudBlazor",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mvromer/blazor-wasm-ext-mud-blazor.git"
+  },
+  "keywords": [
+    "blazor",
+    "wasm",
+    "single-spa",
+    "mudblazor"
+  ],
+  "author": "Michael Romer and Omar Lara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mvromer/blazor-wasm-ext-mud-blazor/issues"
+  },
+  "homepage": "https://github.com/mvromer/blazor-wasm-ext-mud-blazor#readme"
+}
