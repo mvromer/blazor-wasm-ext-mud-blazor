@@ -1,0 +1,32 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release version
+        required: true
+        type: string
+
+name: Make Release
+run-name: Releasing v${{ inputs.version }}
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        registry-url: 'https://registry.npmjs.org'
+    - name: Version blazor-wasm-ext-mud-blazor
+      run: npm version ${{ inputs.version }} --no-git-tag-version
+    - name: Install blazor-wasm-ext-mud-blazor dependencies
+      run: npm ci
+    - name: Build blazor-wasm-ext-mud-blazor
+      run: npm run build
+    - name: Pack blazor-wasm-ext-mud-blazor
+      run: npm pack
+    - name: Publish blazor-wasm-ext-mud-blazor ${{ inputs.version }}
+      run: npm publish ./blazor-wasm-ext-mud-blazor-${{ inputs.version }}.tgz
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
