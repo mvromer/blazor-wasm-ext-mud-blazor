@@ -2,9 +2,20 @@
   "name": "blazor-wasm-ext-mud-blazor",
   "version": "0.1.0",
   "description": "Experimental extension for blazor-wasm-single-spa to add micro-frontend support for MudBlazor",
+  "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -21,5 +32,9 @@
   "bugs": {
     "url": "https://github.com/mvromer/blazor-wasm-ext-mud-blazor/issues"
   },
-  "homepage": "https://github.com/mvromer/blazor-wasm-ext-mud-blazor#readme"
+  "homepage": "https://github.com/mvromer/blazor-wasm-ext-mud-blazor#readme",
+  "devDependencies": {
+    "blazor-wasm-single-spa": "^0.4.1",
+    "typescript": "^5.3.3"
+  }
 }
