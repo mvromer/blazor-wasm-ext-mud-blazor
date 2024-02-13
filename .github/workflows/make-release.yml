@@ -19,7 +19,7 @@ jobs:
         node-version: 16
         registry-url: 'https://registry.npmjs.org'
     - name: Version blazor-wasm-ext-mud-blazor
-      run: npm version ${{ inputs.version }} --no-git-tag-version
+      run: npm version ${{ inputs.version }} --no-git-tag-version --allow-same-version
     - name: Install blazor-wasm-ext-mud-blazor dependencies
       run: npm ci
     - name: Build blazor-wasm-ext-mud-blazor
