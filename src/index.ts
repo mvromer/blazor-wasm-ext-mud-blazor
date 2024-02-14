@@ -1,8 +1,8 @@
-import type { BlazorWebAssemblyAppExtension } from "blazor-wasm-single-spa";
+import type { BlazorWebAssemblyAppExtension } from 'blazor-wasm-single-spa';
 
 // NOTE: Ideally we would have better type declarations for each object we save, but there don't
 // appear to be any available. Likely we would need to create our own if we choose to go that route.
-type GlobalMudBlazorState = {
+type MudBlazorState = {
   mudWindow: any;
   mudResizeObserver: any;
   mudScrollSpy: any;
@@ -23,56 +23,56 @@ type GlobalMudBlazorState = {
   serializeParameter: (data: any, spec: any) => any;
 };
 
-const globalMudBlazorState: GlobalMudBlazorState = {
-  mudWindow: undefined,
-  mudResizeObserver: undefined,
-  mudScrollSpy: undefined,
-  mudJsEvent: undefined,
-  mudElementRef: undefined,
-  mudResizeListener: undefined,
-  mudResizeListenerFactory: undefined,
-  mudKeyInterceptor: undefined,
-  mudThrottledEventManager: undefined,
-  mudEventProjections: undefined,
-  mudScrollListener: undefined,
-  mudpopoverHelper: undefined,
-  mudPopover: undefined,
-  mudDragAndDrop: undefined,
-  mudScrollManager: undefined,
-  darkModeChange: () => undefined,
-  getTabbableElements: () => undefined,
-  serializeParameter: () => undefined,
-};
+export default function mudBlazorExtension(): BlazorWebAssemblyAppExtension {
+  const mudBlazorState: MudBlazorState = {
+    mudWindow: undefined,
+    mudResizeObserver: undefined,
+    mudScrollSpy: undefined,
+    mudJsEvent: undefined,
+    mudElementRef: undefined,
+    mudResizeListener: undefined,
+    mudResizeListenerFactory: undefined,
+    mudKeyInterceptor: undefined,
+    mudThrottledEventManager: undefined,
+    mudEventProjections: undefined,
+    mudScrollListener: undefined,
+    mudpopoverHelper: undefined,
+    mudPopover: undefined,
+    mudDragAndDrop: undefined,
+    mudScrollManager: undefined,
+    darkModeChange: () => undefined,
+    getTabbableElements: () => undefined,
+    serializeParameter: () => undefined,
+  };
 
-const mudBlazorExtension: BlazorWebAssemblyAppExtension = {
-  stylePaths: ["_content/MudBlazor/MudBlazor.min.css"],
-  additionalImportPaths: ["_content/MudBlazor/MudBlazor.min.js"],
-  beforeBlazorStart: () => {
-    for (let key in globalMudBlazorState) {
-      if (globalMudBlazorState.hasOwnProperty(key)) {
-        // @ts-ignore objects within globalMudBlazorState are of type 'any'
-        globalMudBlazorState[key] = window[key];
+  return {
+    stylePaths: ['_content/MudBlazor/MudBlazor.min.css'],
+    additionalImportPaths: ['_content/MudBlazor/MudBlazor.min.js'],
+    beforeBlazorStart: () => {
+      for (let key in mudBlazorState) {
+        if (mudBlazorState.hasOwnProperty(key)) {
+          // @ts-ignore objects within mudBlazorState are of type 'any'
+          mudBlazorState[key] = window[key];
+        }
       }
-    }
-  },
+    },
 
-  afterBlazorRestore: () => {
-    for (let key in globalMudBlazorState) {
-      if (globalMudBlazorState.hasOwnProperty(key)) {
-        // @ts-ignore objects within globalMudBlazorState are of type 'any'
-        window[key] = globalMudBlazorState[key];
+    afterBlazorRestore: () => {
+      for (let key in mudBlazorState) {
+        if (mudBlazorState.hasOwnProperty(key)) {
+          // @ts-ignore objects within mudBlazorState are of type 'any'
+          window[key] = mudBlazorState[key];
+        }
       }
-    }
-  },
+    },
 
-  afterBlazorClear: () => {
-    for (let key in globalMudBlazorState) {
-      if (globalMudBlazorState.hasOwnProperty(key)) {
-        // @ts-ignore key type is 'any'.
-        delete window[key];
+    afterBlazorClear: () => {
+      for (let key in mudBlazorState) {
+        if (mudBlazorState.hasOwnProperty(key)) {
+          // @ts-ignore key type is 'any'.
+          delete window[key];
+        }
       }
-    }
-  },
-};
-
-export default mudBlazorExtension;
+    },
+  };
+}

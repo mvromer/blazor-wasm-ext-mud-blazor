@@ -8,8 +8,8 @@ occurs when a Blazor WASM micro-frontend unmounted and mounted, respectively, by
 ## Usage
 
 ```javascript
-import singleSpaBlazor from "blazor-wasm-single-spa";
-import mudBlazorExtension from "blazor-wasm-ext-mud-blazor";
+import singleSpaBlazor from 'blazor-wasm-single-spa';
+import mudBlazorExtension from 'blazor-wasm-ext-mud-blazor';
 
 export const { bootstrap, mount, unmount } = singleSpaBlazor({
   // Typical configuration
@@ -20,6 +20,6 @@ export const { bootstrap, mount, unmount } = singleSpaBlazor({
   additionalImportPaths: ['my-js-interop.js'],
 
   // NEW: Adding MudBlazor app extension
-  appExtension: [mudBlazorExtension],
+  appExtension: [mudBlazorExtension()],
 });
 ```
